@@ -1,0 +1,7 @@
+/* You can add global styles to this file, and also import other style files */
+nav a {
+  padding: 5px;
+  border: 2px solid black;
+}
+
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
