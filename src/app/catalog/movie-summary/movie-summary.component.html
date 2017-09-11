@@ -1,42 +1,17 @@
+<md-card style="width: 250px;" [style.background]="'lightBlue'">
+  <img md-card-md-image src="/assets/movies/{{ movie.title }}.png" class="md-card-image" alt="user avatar">
+  <br/> <br/>
+  <md-card-header>
+    <md-card-title>{{ movie.title }}</md-card-title>
+    <md-card-subtitle>{{ movie.director }}</md-card-subtitle>
+  </md-card-header>
 
-    <md-card style="width: 300px;" >
-        <md-card-header>
-            <md-card-title>{{ movie.title }}</md-card-title>
-            <md-card-subtitle>{{ movie.director }}</md-card-subtitle>
-          </md-card-header>
-      <img  md-card-md-image
-      src="/assets/movies/{{ movie.title }}.png" class="md-card-image" alt="user avatar">
-      <md-card-content>
-          <p>The Three Main Characters</p>
-          
-          <div *ngFor="let character of movie.characters ; let i=index">
-              <p *ngIf="i<3" >
-             lol
-              </p> 
-            </div>
-        </md-card-content>
-
-    </md-card>
-
-
-<!-- 
-<div fxLayout="row" fxLayoutWrap >
-<md-card class="movie-card" fxFlex.lg="100" fxFlex.lt-lg="100" fxFlex.xs="100" >
-    <md-card-header>
-        <md-card-title>{{ movie.title }}</md-card-title>
-        <md-card-subtitle>{{ movie.director }}</md-card-subtitle>
-      </md-card-header>
-      <img
-      md-card-md-image
-      src="/assets/movies/{{ movie.title }}.png">
-      <md-card-content>
-        <p>The Three Main Characters</p>
-        {{getCharacter('https://swapi.co/api/people/1')}}
-        <div *ngFor="let character of movie.characters ; let i=index">
-            <p *ngIf="i<3" >
-           lol
-            </p> 
-          </div>
-      </md-card-content>
+  <md-card-content>
+    <p>The Three Main Characters</p>
+    <div *ngFor="let character of movie.characters ; let i=index;let odd=odd">
+      <p *ngIf="i<3">
+        lol
+      </p>
+    </div>
+  </md-card-content>
 </md-card>
-</div> -->

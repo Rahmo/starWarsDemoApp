@@ -31,7 +31,7 @@ export interface IMovieSwapiAPIService {
     director: string;
     producer: string;
     release_date: string;
-    characters: ICharacter[];
+    characters: Array<ICharacter>;
     planets: string[];
     starships: string[];
     vehicles:string[];

@@ -1,5 +1,5 @@
 {
-  "name": "apollo",
+  "name": "starwars",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -14,7 +14,7 @@
   "dependencies": {
     "@angular/animations": "^4.1.0",
     "@angular/cdk": "^2.0.0-beta.10",
-    "@angular/common": "^4.0.0",
+    "@angular/common": "^4.3.6",
     "@angular/compiler": "^4.0.0",
     "@angular/core": "^4.0.0",
     "@angular/flex-layout": "^2.0.0-beta.9",

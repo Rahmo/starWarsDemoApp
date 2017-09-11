@@ -21,8 +21,10 @@ import {
 } from '../models';
 @Injectable()
 export class MovieService {
+  movie: IMovieDTO
   movies : IMovieDTO[]
-  moviesObj : IMovieData[]
+  moviesObject : IMovieData[]
+  characters: ICharacter[]
   constructor(private http: Http) { }
  
   getSwapiMovie():Observable<IMovieDTO>{
@@ -34,58 +36,52 @@ export class MovieService {
     // .catch(this._serverError);
      .map((result: Response) => { //observale
       return (<IMovieSwapiAPIService>(result.json())).results;
-   }).do(data => console.log('server data lol:', data))
+   }).do(data => console.log('server data:', data))
    .catch(this._serverError); 
   }
-  getSwapiMovieEdite():Observable<IMovieDTO>{
-    const query: string = `https://swapi.co/api/films/?format=json`;
-    return this.http.get(query)
-    .flatMap((response: Response) => 
-    //Waits until all the requests are completed before emitting
-    //an array of results
-    Observable.forkJoin(response.json().results.map(film => 
-     film.characters
-   // .map(character=>this.http.get(character))
-    .map(character=>this.http.get(character))
-    ))).do(data => console.log('server data from edit:', data))
-    .catch(this._serverError);
-  
-  }
 
-  searchMovies(): Observable<any> {
-    const query: string = `https://swapi.co/api/films/?format=json`;
-    let that = this
-    let queryUrl: string = query;
-    return this.http.get(queryUrl)
-    .flatMap((response: Response) => response.json().results)
-    .flatMap((film: IMovieDTO) =>
-    // Observable.zip(
-    //   Observable.of(
-    //     (film.title, film.director, film.release_date, Array<ICharacter>())),
-    //   Observable.from(film.characters)
-    // )
-    Observable.forkJoin(film.characters.map(character => 
-       this.http.get(character).map(resp => resp.json().name).do(a=>console.log("wow"+a))
-    ))
-    
-  ).map(a=>this.moviesObj = a).do(a=>console.log("fromMap"+a))
-  
-    }
-    
   search(): Observable<IMovieDTO> {
-    return this.http.get(`https://swapi.co/api/films/?format=json`)
+    const query: string = `https://swapi.co/api/films/?format=json`;
+   return this.http.get(query)
+   
+   .map((response: Response) => response.json().results as IMovieDTO)
+  //  .flatMap((film : IMovieDTO) => {
+  //      return Observable.forkJoin(
+  //          film.characters.map(user=>
+  //              this.http.get(user)
+  //              .map(response => response.json().name)   
+  //          )   
+  //      )
+  //  }).map(x=> [].concat.apply([],x))
+   //.map((film: IMovieDTO) => 
+   //Waits until all the requests are completed before emitting
+   //an array of results
+  //  Observable.forkJoin(film.characters.map(character => 
+  //    this.http.get(character).map(resp => resp.json().name)
+  //  ))
+ // )
     
-    .flatMap((response: Response) => 
-               //Waits until all the requests are completed before emitting
-               //an array of results
-               Observable.forkJoin(response.json().results.map(film => 
-                film.characters
-              // .map(character=>this.http.get(character))
-               .map(character=>this.http.get(character))
-               ))).do(data => console.log('server data:', data))
-               .catch(this._serverError);
-  }
+   
+
+    // .map((res: Response) => {
+    //   this.movie = res.json().results;
+    //   console.log("the moviesObject"+this.moviesObject)
+    //   return this.movie;
+    // })
+   // .flatMap(film => film)
   
+             
+
+             
+  //  .flatMap(a=>a.characters)
+  //   .flatMap(a=>a,(film: string[]) => this.http.get(film), 
+  //   (_, resp) => resp.json().name)
+    // .flatMap((film: string) => this.http.get(film), 
+    // (_, resp) => resp.json().name)
+
+  
+}
+
   public getSwapiCharacter(characterUrl:string):Observable<ICharacter> {
     return this.http
     .get(characterUrl)
@@ -95,30 +91,6 @@ export class MovieService {
    .do(data => console.log('char server data:', data))
    .catch(this._serverError);
   }
-
- //------------using a Promise -------------////
-//   getSwapiCharacter (characterUrl:string): Promise<ICharacter> {
-//     return this.http.get(characterUrl)
-//         .toPromise()
-//         .then(this.extractData)
-//         .catch(this.handleError);
-// }
-// private extractData(res: Response) {
-//   console.log('server data:', res)
-//     let body = res.json();
-//     return body || [];
-// }
-// private handleError (error: any) {
-//     // In a real world app, we might use a remote logging infrastructure
-//     // We'd also dig deeper into the error to get a better message
-//     let errMsg = (error.message) ? error.message :
-//         error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-//     console.error(errMsg); // log to console instead
-//     return Observable.throw(errMsg);
-// }
-//-----------End Promise ----------//
-
-
 
   private _serverError(err: any) {
     console.log('sever error:', err);  // debug

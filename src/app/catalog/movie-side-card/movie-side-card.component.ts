@@ -19,6 +19,7 @@ export class MovieSideCardComponent implements OnInit {
     this.getCharacter()
   }
 
+  //Getting the values according to the title recieved from parent @
   public getCharacter(): string {
     let characterUrl :string = "" ;
     if (this.title == "Fav Character"){
