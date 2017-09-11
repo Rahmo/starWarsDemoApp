@@ -11,7 +11,7 @@ import "rxjs/add/operator/bufferCount"
 import * as Rx from 'rxjs/rx'
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 const SWAPI_API: string = 'https://swapi.co/api';
-
+const query: string = `https://swapi.co/api/films/?format=json`;
 
 import {
   IMovieSwapiAPIService,
@@ -28,12 +28,8 @@ export class MovieService {
   constructor(private http: Http) { }
  
   getSwapiMovie():Observable<IMovieDTO>{
-    const query: string = `https://swapi.co/api/films/?format=json`;
     return this.http
     .get(query)
-    // .map(res => res.json())  // could raise an error if invalid JSON
-    // .do(data => console.log('server data:', data))  // debug
-    // .catch(this._serverError);
      .map((result: Response) => { //observale
       return (<IMovieSwapiAPIService>(result.json())).results;
    }).do(data => console.log('server data:', data))
@@ -41,11 +37,11 @@ export class MovieService {
   }
 
   search(): Observable<IMovieDTO> {
-    const query: string = `https://swapi.co/api/films/?format=json`;
    return this.http.get(query)
-   
    .map((response: Response) => response.json().results as IMovieDTO)
-  //  .flatMap((film : IMovieDTO) => {
+  
+  
+   //  .flatMap((film : IMovieDTO) => {
   //      return Observable.forkJoin(
   //          film.characters.map(user=>
   //              this.http.get(user)
@@ -92,13 +88,24 @@ export class MovieService {
    .catch(this._serverError);
   }
 
+  //Trying to get nested http calls with reactiveX rxjs
+  getFilms(): Observable<any>{
+    return this.http.get(query)
+        .map((response: Response)  => response.json().results)  
+        .flatMap((films) => {
+            return Observable.forkJoin(
+                films.map(film=>
+                  film.characters
+                ).flatMap(character=>this.http.get(character)
+                .map(response => response.json().name)   )
+            )
+        }).map(x=> [].concat.apply([],x))
+      }
+      
   private _serverError(err: any) {
     console.log('sever error:', err);  // debug
     if(err instanceof Response) {
       return Observable.throw(err.json().error || 'backend server error');
-      // if you're using lite-server, use the following line
-      // instead of the line above:
-      //return Observable.throw(err.text() || 'backend server error');
     }
     return Observable.throw(err || 'backend server error');
 }

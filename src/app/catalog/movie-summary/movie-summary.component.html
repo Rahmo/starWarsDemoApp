@@ -10,7 +10,7 @@
     <p>The Three Main Characters</p>
     <div *ngFor="let character of movie.characters ; let i=index;let odd=odd">
       <p *ngIf="i<3">
-        lol
+        {{character}}
       </p>
     </div>
   </md-card-content>
