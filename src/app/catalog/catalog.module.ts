@@ -8,11 +8,13 @@ import { MaterialModule } from '../material.module';
 import { MovieSideCardComponent } from './movie-side-card/movie-side-card.component';
 import { ChartsModule } from 'ng2-charts';
 import { MoviesChartComponent } from './movies-chart/movies-chart.component';
+import { HttpModule } from '@angular/http';
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
     ChartsModule,
+    HttpModule
   ],
   declarations: [CatalogThumbsComponent, MovieSummaryComponent, MovieSideCardComponent, MoviesChartComponent],
   //Any component that would be exposed need to be written below

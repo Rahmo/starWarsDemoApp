@@ -8,6 +8,7 @@ import "rxjs/add/observable/interval";
 import "rxjs/add/operator/take";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/bufferCount"
+import 'rxjs/Rx';
 import * as Rx from 'rxjs/rx'
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 const SWAPI_API: string = 'https://swapi.co/api';
@@ -26,38 +27,38 @@ export class MovieService {
   moviesObject : IMovieData[]
   characters: ICharacter[]
   constructor(private http: Http) { }
- 
+
   getSwapiMovie():Observable<IMovieDTO>{
     return this.http
     .get(query)
      .map((result: Response) => { //observale
       return (<IMovieSwapiAPIService>(result.json())).results;
    }).do(data => console.log('server data:', data))
-   .catch(this._serverError); 
+   .catch(this._serverError);
   }
 
   search(): Observable<IMovieDTO> {
    return this.http.get(query)
    .map((response: Response) => response.json().results as IMovieDTO)
-  
-  
+
+
    //  .flatMap((film : IMovieDTO) => {
   //      return Observable.forkJoin(
   //          film.characters.map(user=>
   //              this.http.get(user)
-  //              .map(response => response.json().name)   
-  //          )   
+  //              .map(response => response.json().name)
+  //          )
   //      )
   //  }).map(x=> [].concat.apply([],x))
-   //.map((film: IMovieDTO) => 
+   //.map((film: IMovieDTO) =>
    //Waits until all the requests are completed before emitting
    //an array of results
-  //  Observable.forkJoin(film.characters.map(character => 
+  //  Observable.forkJoin(film.characters.map(character =>
   //    this.http.get(character).map(resp => resp.json().name)
   //  ))
  // )
-    
-   
+
+
 
     // .map((res: Response) => {
     //   this.movie = res.json().results;
@@ -65,17 +66,17 @@ export class MovieService {
     //   return this.movie;
     // })
    // .flatMap(film => film)
-  
-             
 
-             
+
+
+
   //  .flatMap(a=>a.characters)
-  //   .flatMap(a=>a,(film: string[]) => this.http.get(film), 
+  //   .flatMap(a=>a,(film: string[]) => this.http.get(film),
   //   (_, resp) => resp.json().name)
-    // .flatMap((film: string) => this.http.get(film), 
+    // .flatMap((film: string) => this.http.get(film),
     // (_, resp) => resp.json().name)
 
-  
+
 }
 
   public getSwapiCharacter(characterUrl:string):Observable<ICharacter> {
@@ -91,7 +92,7 @@ export class MovieService {
   //Trying to get nested http calls with reactiveX rxjs
   getFilms(): Observable<any>{
     return this.http.get(query)
-        .map((response: Response)  => response.json().results)  
+        .map((response: Response)  => response.json().results)
         .flatMap((films) => {
             return Observable.forkJoin(
                 films.map(film=>
@@ -101,7 +102,7 @@ export class MovieService {
             )
         }).map(x=> [].concat.apply([],x))
       }
-      
+
   private _serverError(err: any) {
     console.log('sever error:', err);  // debug
     if(err instanceof Response) {
@@ -110,6 +111,6 @@ export class MovieService {
     return Observable.throw(err || 'backend server error');
 }
 
-    
-  
+
+
 }
