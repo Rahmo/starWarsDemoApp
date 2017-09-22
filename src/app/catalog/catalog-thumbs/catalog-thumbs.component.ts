@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IMovieDTO ,ICharacter} from '../../models';
+import { IMovieDTO, ICharacter} from '../../models';
 import { MovieService } from '../movie.service';
 @Component({
   selector: 'app-catalog-thumbs',
@@ -8,16 +8,15 @@ import { MovieService } from '../movie.service';
 })
 export class CatalogThumbsComponent implements OnInit {
 movies: IMovieDTO;
-characters : ICharacter[]
+characters: ICharacter[]
   constructor(private movieService: MovieService) { }
 
   ngOnInit() {
 
     this.movieService.search()
     .subscribe((
-    data: IMovieDTO) => 
+    data: IMovieDTO) =>
     this.movies = data,
     err  => console.log(<any>err));
     }
-  
 }
