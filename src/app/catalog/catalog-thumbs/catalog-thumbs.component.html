@@ -1,24 +1,38 @@
 <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-   <md-grid-list cols="4" rowHeight="200px">
-      
-  <md-grid-tile colspan='2' class="babyBlue" rowspan="3">
-        <div > 
-            <div fxLayout="row" fxLayoutWrap layout-align="center center" >
-        <app-movie-side-card [title]="'Fav Character'">  </app-movie-side-card>
-        <app-movie-side-card [title]="'Least Fav Character'" >  </app-movie-side-card>
-            </div>
-       <div class="gray"> <app-movies-chart></app-movies-chart></div>
-        </div>
-    </md-grid-tile> 
-      <md-grid-tile colspan='2' class="gray"  rowspan="8" >
-          <div fxLayout="row" fxLayoutWrap> 
-              <app-movie-summary   
-              *ngFor="let movie of movies"
-              [movie]="movie"
-            >
-            </app-movie-summary>
-          </div>
-      </md-grid-tile>
-    </md-grid-list>
 
+<div  class="container" fxLayoutWrap fxFlexFill="100%" fxLayout fxLayout.xs="column" fxFlex=100% fxLayoutGap="10px" fxLayoutGap.xs="0">
+<div class="item item-1" fxFlexOrder fxFlexFill  fxFlex="30%" fxFlex.sm="602px" fxLayout="column" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutGap.xs="0">
+<div class="item item-1" fxFlex="10%"  fxFlex.sm="5%">    
+  <mat-card fxFlex>
+    <3
+           <app-movie-side-card [title]="'Fav Character'">  </app-movie-side-card><br>
+    :(     <app-movie-side-card [title]="'Least Fav Character'" >  </app-movie-side-card>
+  </mat-card>
+</div>
+<div class="item item-2" fxFlex="400px" fxFlex.sm="400px">
+    <mat-card fxFlex="100%">  <app-movies-chart></app-movies-chart></mat-card>
+</div>
 
+</div>
+
+<div fxFlexOrder class="item item-2"  fxFlex fxLayout fxLayout.xs="column"  fxLayoutGap="10px" fxLayoutGap.xs="0">
+<div  fxFlex >  
+    <mat-card  fxLayoutAlign="center" fxLayout="row"  fxLayout.sm="column" fxFlex flex-sm="100%" fxLayout.xs="10"  >
+    <mat-card *ngFor="let movie of movies" flex-sm="100%"  [style.background]="'lightBlue'">
+     <mat-card-header>
+       <mat-card-title>{{ movie.title }}</mat-card-title>
+       <mat-card-subtitle>{{ movie.director }}</mat-card-subtitle>
+     </mat-card-header>
+     <img  class="img-card"  mat-card-image src="/assets/movies/{{ movie.title }}.png" >
+     <mat-card-content>
+       The Three Main Characters
+       <div *ngFor="let character of movie.characters ; let i=index;let odd=odd">
+         <span *ngIf="i<3">
+           {{character}}
+         </span>
+       </div>
+     </mat-card-content>
+   </mat-card>  </mat-card></div>
+
+</div>
+</div>

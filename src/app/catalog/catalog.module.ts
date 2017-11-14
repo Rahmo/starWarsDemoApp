@@ -9,12 +9,15 @@ import { MovieSideCardComponent } from './movie-side-card/movie-side-card.compon
 import { ChartsModule } from 'ng2-charts';
 import { MoviesChartComponent } from './movies-chart/movies-chart.component';
 import { HttpModule } from '@angular/http';
+import { FlexLayoutModule } from "@angular/flex-layout";
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
     ChartsModule,
-    HttpModule
+    HttpModule,
+    RouterModule,
+    FlexLayoutModule
   ],
   declarations: [CatalogThumbsComponent, MovieSummaryComponent, MovieSideCardComponent, MoviesChartComponent],
   //Any component that would be exposed need to be written below

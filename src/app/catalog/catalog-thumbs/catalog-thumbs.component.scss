@@ -2,26 +2,13 @@
   .em-heart{
     margin: 0 15px 15px 0;
   }
-  md-grid-list {
-    margin: 8px; }
-  
-  .gray {
-    background: #f5f5f5; }
-  
-  .green {
-    background: #b9f6ca; }
-  
-   .yellow {
-    background: #ffff8d; }
-  
-  .blue {
-    background: #84ffff; }
-  
-   .purple {
-    background: #b388ff; }
-  
-   .babyBlue {
-    background: #90BFE8; }
-  
-   md-grid-tile {
-    transition: all 400ms ease-out 50ms; }
+    mat-card {
+      margin: 0 16px 16px 0;
+    }
+    .img-card {
+      width: 80%;
+      height:50%;
+    }
+    
+    
+ 

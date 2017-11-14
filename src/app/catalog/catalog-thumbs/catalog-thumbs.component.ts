@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IMovieDTO, ICharacter} from '../../models';
 import { MovieService } from '../movie.service';
+import { RouterModule, Routes } from '@angular/router';
 @Component({
   selector: 'app-catalog-thumbs',
   templateUrl: './catalog-thumbs.component.html',

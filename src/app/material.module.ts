@@ -1,47 +1,64 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {
-  MdButtonModule,
-  MdCardModule,
-  MdInputModule,
-  MdSelectModule,
-  MdMenuModule,
-  MdToolbarModule,
-  MdIconModule,
-  MdGridListModule
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatSliderModule,
+  MatSnackBarModule,
+  MatTooltipModule,
+  MatToolbarModule,
+  MatRadioModule,
+  MatDatepickerModule
 } from '@angular/material';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
+import {NgModule} from '@angular/core';
 
 @NgModule({
-  declarations: [],
   imports: [
-    CommonModule,
-    MdButtonModule,
-    MdCardModule,
-    MdInputModule,
-    MdSelectModule,
-    FlexLayoutModule,
-    MdButtonModule,
-    MdMenuModule,
-    MdToolbarModule,
-    MdIconModule,
-    MdCardModule,
-    MdGridListModule
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatCardModule,
+    MatSliderModule,
+    MatProgressBarModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatGridListModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule,
+    MatListModule,
+    MatDialogModule,
+    MatToolbarModule,
+    MatRadioModule,
+    MatDatepickerModule
   ],
   exports: [
-    MdButtonModule,
-    MdCardModule,
-    MdInputModule,
-    MdSelectModule,
-    FlexLayoutModule,
-    MdButtonModule,
-    MdMenuModule,
-    MdToolbarModule,
-    MdIconModule,
-    MdCardModule,
-    MdGridListModule
-  ]
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatCardModule,
+    MatSliderModule,
+    MatProgressBarModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatGridListModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule,
+    MatListModule,
+    MatDialogModule,
+    MatToolbarModule,
+    MatRadioModule,
+    MatDatepickerModule
+  ],
 })
-//Important to be exportable
-export class MaterialModule { }
+
+export class MaterialModule {}
